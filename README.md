@@ -21,7 +21,7 @@ rails new server
 cd server
 ```
 
-Add `rack-cors` to your Gemfile (`server/Gemfile`)
+Add `rack-cors` to the `Gemfile`
 ```
 gem 'rack-cors'
 ```
@@ -31,7 +31,7 @@ Run Bundler to refresh your gem store
 bundle install
 ```
 
-Enable CORS in `server/config/application.rb`
+Enable CORS in `config/application.rb`
 ```
 # put this inside the Application class
 config.middleware.insert_before 0, "Rack::Cors" do
@@ -42,17 +42,17 @@ config.middleware.insert_before 0, "Rack::Cors" do
 end    
 ```
 
-Allow CORS requests to come through in `server/app/controllers/UserController.rb`
+Create the User scaffold
+```
+rails g scaffold user firstname:string lastname:string shirtSize:string vegetarian:boolean
+```
+
+Allow CORS requests to come through in `app/controllers/user_controller.rb`
 ```
 protect_from_forgery with: :null_session
 ```
 (you can also do this in ApplicationController, but that is app-wide and is not a
 great idea..)
-
-Create the User scaffold
-```
-rails g scaffold user firstname:string lastname:string shirtSize:string vegetarian:boolean
-```
 
 Run the Rails migrations
 ```
